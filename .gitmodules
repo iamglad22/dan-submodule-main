@@ -1,0 +1,3 @@
+[submodule "submod_folder"]
+	path = submod_folder
+	url = https://github.com/iamglad22/dan-submodule.git
