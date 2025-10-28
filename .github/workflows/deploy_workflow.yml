@@ -26,13 +26,23 @@ jobs:
       #  run: git submodule update --remote --merge
       
       # Sync submodule URLs (in case they changed)
-      - name: Sync submodules
-        run: git submodule sync
+      #- name: Sync submodules
+      #  run: git submodule sync
 
       # Update submodules to latest remote commits
-      - name: Update submodules
+      #- name: Update submodules
+      #  run: |
+      #    git submodule update --init --recursive --remote
+
+      - name: Update submodules to latest commits
         run: |
+          git submodule sync
           git submodule update --init --recursive --remote
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add dan-submodule
+          git commit -m "Auto-update submodule with 2nd agency's latest changes" || echo "No updates"
+          git push origin main || echo "No changes to push"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
