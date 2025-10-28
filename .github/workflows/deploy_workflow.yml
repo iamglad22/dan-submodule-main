@@ -22,8 +22,17 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Update submodules to latest
-        run: git submodule update --remote --merge
+      #- name: Update submodules to latest
+      #  run: git submodule update --remote --merge
+      
+      # Sync submodule URLs (in case they changed)
+      - name: Sync submodules
+        run: git submodule sync
+
+      # Update submodules to latest remote commits
+      - name: Update submodules
+        run: |
+          git submodule update --init --recursive --remote
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
