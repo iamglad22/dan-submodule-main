@@ -18,8 +18,12 @@ jobs:
       - name: Checkout code (with submodules)
         uses: actions/checkout@v4
         with:
-          submodules: true
+          #submodules: true
+          submodules: recursive
           fetch-depth: 0
+
+      - name: Update submodules to latest
+        run: git submodule update --remote --merge
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
